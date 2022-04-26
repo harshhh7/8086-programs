@@ -1,0 +1,25 @@
+ASSUME CS:CODE, DS:DATA
+DATA SEGMENT
+  NUM DB 144D
+ DATA ENDS
+ 
+ CODE SEGMENT
+  START:
+    MOV AX, DATA
+    MOV DS, AX
+    MOV BX, NUM
+    MOV AX, 0001H
+    MOV CX, 0001H
+    LOOP1:  MOV AX, CX
+            MUL CX
+            INC CX
+            CMP AX, BX
+            JNZ LOOP1
+            SUB CX, 0001H
+            MOV AX, CX
+HLT
+CODE ENDS
+END START
+
+;FINAL NUMBER IS STORED IN AX
+    
