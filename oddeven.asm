@@ -1,0 +1,33 @@
+ASSUME CS:CODE, DS:DATA
+DATA SEGMENT
+  STR1 DB "NUMBER IS EVEN$"
+  STR2 DB "NUMBER IS ODD$"
+DATA ENDS
+
+CODE SEGMENT
+  START:
+    MOV AX, DATA
+    MOV DS, AX
+    MOV AX, 0010H ; the number to test
+    RCR AX, 01H
+    JC ODDP
+    JNC EVENP
+    
+  ODDP:
+    MOV AH, 09H ; ah value 09 to display
+    MOV DX, OFFSET STR2 ; same as lea dx, str2
+    INT 21H
+    JMP EXIT
+  
+  EVENP:
+    MOV AH, 09H
+    MOV DX, OFFSET STR1 ;
+    INT 21H
+    JMP EXIT
+  
+  EXIT:
+    MOV AH, 4CH
+    INT 21H
+    
+CODE ENDS
+END START
